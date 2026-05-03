@@ -103,9 +103,9 @@ function HeroContent() {
       </p>
 
       <div className="flex flex-col sm:flex-row gap-3 pointer-events-auto w-full sm:w-auto">
-        <button className="bg-blue-600 active:bg-blue-800 hover:bg-blue-700 text-white font-semibold py-3.5 sm:py-3 px-7 rounded-full transition duration-200 w-full sm:w-auto text-sm sm:text-base shadow-lg shadow-blue-500/30 min-h-[48px]">
+        <a href="https://medx-ai-backend.vercel.app" className="bg-blue-600 active:bg-blue-800 hover:bg-blue-700 text-white font-semibold py-3.5 sm:py-3 px-7 rounded-full transition duration-200 w-full sm:w-auto text-sm sm:text-base shadow-lg shadow-blue-500/30 min-h-[48px] flex items-center justify-center">
           Começar Grátis
-        </button>
+        </a>
         <button className="bg-white/5 active:bg-white/10 border border-gray-600 hover:border-gray-400 text-gray-200 hover:text-white font-medium py-3.5 sm:py-3 px-7 rounded-full transition duration-200 flex items-center justify-center gap-2 w-full sm:w-auto text-sm sm:text-base min-h-[48px]">
           <svg className="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
@@ -214,7 +214,7 @@ function Navbar() {
         <div className="flex items-center gap-3 sm:gap-4">
           <a href="#" className="hidden md:block text-gray-300 hover:text-white text-sm transition-colors">Falar com Vendas</a>
           <a href="#" className="hidden sm:block text-gray-300 hover:text-white text-sm transition-colors">Entrar</a>
-          <a href="#" className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold py-2 px-4 sm:px-5 rounded-full text-sm transition duration-200 shadow-md shadow-blue-500/20 min-h-[40px] flex items-center">
+          <a href="https://medx-ai-backend.vercel.app" className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold py-2 px-4 sm:px-5 rounded-full text-sm transition duration-200 shadow-md shadow-blue-500/20 min-h-[40px] flex items-center">
             Começar Grátis
           </a>
           <button
@@ -267,7 +267,7 @@ function Navbar() {
             <a href="#" className="text-gray-300 text-sm py-3 min-h-[48px] flex items-center" onClick={closeMobileMenu}>Preços</a>
             <a href="#" className="text-gray-300 text-sm py-3 min-h-[48px] flex items-center" onClick={closeMobileMenu}>Falar com Vendas</a>
             <a href="#" className="text-gray-300 text-sm py-3 min-h-[48px] flex items-center" onClick={closeMobileMenu}>Entrar</a>
-            <a href="#" className="bg-blue-600 text-white font-semibold text-sm py-3.5 px-6 rounded-full text-center mt-1 min-h-[48px] flex items-center justify-center" onClick={closeMobileMenu}>
+            <a href="https://medx-ai-backend.vercel.app" className="bg-blue-600 text-white font-semibold text-sm py-3.5 px-6 rounded-full text-center mt-1 min-h-[48px] flex items-center justify-center" onClick={closeMobileMenu}>
               Começar Grátis
             </a>
           </div>
@@ -482,7 +482,7 @@ function CTASection() {
           Junte-se a milhares de médicos que já estão usando IA para atender melhor e com mais eficiência.
         </p>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4">
-          <a href="#" className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold py-3.5 px-7 rounded-full transition duration-200 shadow-lg shadow-blue-500/30 text-sm sm:text-base min-h-[52px] flex items-center justify-center">
+          <a href="https://medx-ai-backend.vercel.app" className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold py-3.5 px-7 rounded-full transition duration-200 shadow-lg shadow-blue-500/30 text-sm sm:text-base min-h-[52px] flex items-center justify-center">
             Começar Grátis — sem cartão
           </a>
           <a href="#" className="border border-gray-700 hover:border-gray-500 active:border-gray-400 text-gray-300 hover:text-white font-medium py-3.5 px-7 rounded-full transition duration-200 text-sm sm:text-base min-h-[52px] flex items-center justify-center">
