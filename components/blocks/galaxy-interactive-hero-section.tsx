@@ -2,6 +2,8 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { Suspense, lazy } from 'react';
+import { motion } from 'motion/react';
+import { TestimonialsColumn, type Testimonial } from '@/components/ui/testimonials-columns-1';
 
 const Spline = lazy(() => import('@splinetool/react-spline'));
 
@@ -368,6 +370,104 @@ function FeaturesSection() {
   );
 }
 
+const depoimentos: Testimonial[] = [
+  {
+    text: "O MedX AI transformou minha rotina. Agora gero prontuários completos em segundos apenas falando durante a consulta — economizo mais de 2 horas por dia.",
+    image: "https://randomuser.me/api/portraits/women/44.jpg",
+    name: "Dra. Camila Ferreira",
+    role: "Clínica Geral — São Paulo",
+  },
+  {
+    text: "A precisão das sugestões diagnósticas é impressionante. O sistema aponta hipóteses que às vezes passariam despercebidas em uma consulta corrida.",
+    image: "https://randomuser.me/api/portraits/men/32.jpg",
+    name: "Dr. Rafael Mendes",
+    role: "Internista — Belo Horizonte",
+  },
+  {
+    text: "Desde que adotamos o MedX AI na clínica, reduzimos o índice de no-show em 40% graças aos lembretes automáticos por WhatsApp.",
+    image: "https://randomuser.me/api/portraits/women/68.jpg",
+    name: "Dra. Juliana Costa",
+    role: "Coordenadora Médica — Rio de Janeiro",
+  },
+  {
+    text: "A análise automática de exames laboratoriais com alertas críticos nos ajudou a identificar um caso urgente que poderia ter sido ignorado.",
+    image: "https://randomuser.me/api/portraits/men/55.jpg",
+    name: "Dr. André Oliveira",
+    role: "Cardiologista — Curitiba",
+  },
+  {
+    text: "Finalmente uma plataforma que respeita a LGPD de verdade. Os dados dos meus pacientes estão protegidos e eu trabalho com total tranquilidade.",
+    image: "https://randomuser.me/api/portraits/women/12.jpg",
+    name: "Dra. Marina Santos",
+    role: "Pediatra — Brasília",
+  },
+  {
+    text: "O dashboard de analytics clínico me permite enxergar padrões nos diagnósticos da minha população de pacientes — algo impossível de fazer manualmente.",
+    image: "https://randomuser.me/api/portraits/men/78.jpg",
+    name: "Dr. Lucas Barbosa",
+    role: "Médico de Família — Fortaleza",
+  },
+  {
+    text: "Implantamos o MedX AI em nosso hospital em menos de uma semana. A equipe de suporte foi excepcional durante toda a migração.",
+    image: "https://randomuser.me/api/portraits/women/33.jpg",
+    name: "Dra. Fernanda Lima",
+    role: "Diretora Clínica — Porto Alegre",
+  },
+  {
+    text: "A integração com a agenda foi o que me convenceu. Confirmações automáticas, lembretes e reagendamentos — tudo sem precisar de secretária.",
+    image: "https://randomuser.me/api/portraits/men/21.jpg",
+    name: "Dr. Thiago Alves",
+    role: "Dermatologista — Recife",
+  },
+  {
+    text: "Meus residentes adoraram. A IA funciona como um mentor que sugere referências e hipóteses baseadas em evidências durante os atendimentos.",
+    image: "https://randomuser.me/api/portraits/women/57.jpg",
+    name: "Dra. Patrícia Rocha",
+    role: "Professora de Medicina — Campinas",
+  },
+];
+
+const primeiraColuna = depoimentos.slice(0, 3);
+const segundaColuna = depoimentos.slice(3, 6);
+const terceiraColuna = depoimentos.slice(6, 9);
+
+function TestimonialsSection() {
+  return (
+    <section className="py-16 sm:py-20 md:py-24 bg-black relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true }}
+          className="flex flex-col items-center justify-center max-w-[540px] mx-auto mb-10 sm:mb-14"
+        >
+          <div className="flex justify-center mb-4">
+            <div className="border border-blue-500/40 bg-blue-500/10 text-blue-400 py-1 px-4 rounded-full text-xs sm:text-sm font-medium">
+              Depoimentos
+            </div>
+          </div>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tighter text-center leading-tight">
+            O que os médicos{' '}
+            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              estão dizendo
+            </span>
+          </h2>
+          <p className="text-center mt-4 text-gray-400 text-sm sm:text-base leading-relaxed">
+            Mais de 10.000 profissionais de saúde já transformaram sua prática clínica com o MedX AI.
+          </p>
+        </motion.div>
+
+        <div className="flex justify-center gap-6 [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] max-h-[740px] overflow-hidden">
+          <TestimonialsColumn testimonials={primeiraColuna} duration={15} />
+          <TestimonialsColumn testimonials={segundaColuna} className="hidden md:block" duration={19} />
+          <TestimonialsColumn testimonials={terceiraColuna} className="hidden lg:block" duration={17} />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function CTASection() {
   return (
     <section className="py-16 sm:py-20 md:py-24 bg-black">
@@ -479,6 +579,7 @@ export const HeroSection = () => {
         <ScreenshotSection screenshotRef={screenshotRef} isMobile={isMobile} />
         <StatsSection />
         <FeaturesSection />
+        <TestimonialsSection />
         <CTASection />
         <Footer />
       </div>
