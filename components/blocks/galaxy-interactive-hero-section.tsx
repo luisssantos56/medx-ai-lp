@@ -1,21 +1,35 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { Suspense, lazy } from 'react';
 import { motion } from 'motion/react';
 import { TestimonialsColumn, type Testimonial } from '@/components/ui/testimonials-columns-1';
 
 const Spline = lazy(() => import('@splinetool/react-spline'));
 
+// Performance optimization: Use matchMedia with useSyncExternalStore to avoid
+// continuous state updates on every window resize pixel change.
+function subscribeMobile(callback: () => void) {
+  const mql = window.matchMedia('(max-width: 767px)');
+  if (mql.addEventListener) {
+    mql.addEventListener('change', callback);
+    return () => mql.removeEventListener('change', callback);
+  } else {
+    mql.addListener(callback);
+    return () => mql.removeListener(callback);
+  }
+}
+
+function getMobileSnapshot() {
+  return window.matchMedia('(max-width: 767px)').matches;
+}
+
+function getMobileServerSnapshot() {
+  return false;
+}
+
 function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
-  return isMobile;
+  return useSyncExternalStore(subscribeMobile, getMobileSnapshot, getMobileServerSnapshot);
 }
 
 function HeroSplineBackground({ isMobile }: { isMobile: boolean }) {
@@ -71,6 +85,7 @@ function ScreenshotSection({ screenshotRef, isMobile }: {
           loop
           muted
           playsInline
+          preload="metadata"
           className="w-full h-auto block"
         >
           <source src="/videomedxai.mp4" type="video/mp4" />
@@ -525,20 +540,28 @@ export const HeroSection = () => {
   const isMobile = useIsMobile();
 
   useEffect(() => {
+    let ticking = false;
+
+    // Performance optimization: Throttle scroll events with requestAnimationFrame
+    // to ensure only one DOM mutation frame is scheduled at a time during fast scroll.
     const handleScroll = () => {
-      requestAnimationFrame(() => {
-        const scrollPosition = window.pageYOffset;
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollPosition = window.pageYOffset;
 
-        if (screenshotRef.current && !isMobile) {
-          screenshotRef.current.style.transform = `translateY(-${scrollPosition * 0.4}px)`;
-        }
+          if (screenshotRef.current && !isMobile) {
+            screenshotRef.current.style.transform = `translateY(-${scrollPosition * 0.4}px)`;
+          }
 
-        if (heroContentRef.current) {
-          const maxScroll = isMobile ? 250 : 400;
-          const opacity = 1 - Math.min(scrollPosition / maxScroll, 1);
-          heroContentRef.current.style.opacity = opacity.toString();
-        }
-      });
+          if (heroContentRef.current) {
+            const maxScroll = isMobile ? 250 : 400;
+            const opacity = 1 - Math.min(scrollPosition / maxScroll, 1);
+            heroContentRef.current.style.opacity = opacity.toString();
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });

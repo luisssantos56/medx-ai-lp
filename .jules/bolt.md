@@ -1,0 +1,3 @@
+## 2026-10-07 - Optimize scroll RAF scheduling and window resize listener
+**Learning:** Attaching `window.addEventListener('resize')` that calls `setState` on every pixel change triggers high-frequency component re-renders during window resizing. Using `window.matchMedia` with `useSyncExternalStore` subscribes strictly to breakpoint crosses. Additionally, scrolling without a `ticking` guard can queue multiple `requestAnimationFrame` callbacks per frame.
+**Action:** Always prefer `useSyncExternalStore` with `matchMedia` for viewport query hooks, and use a boolean `ticking` flag to throttle scroll handler RAF requests.
